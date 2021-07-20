@@ -1,11 +1,11 @@
 .Node {
-  width: 40px;
-  height: 40px;
-  border: solid black 1px;
+  width: 30px;
+  height: 30px;
+  border: solid black 0.5px;
 }
 
 .Node-wall {
-  background-color: rgb(107, 28, 14);
+  background-color: rgb(24, 4, 1);
 }
 .Start {
   background-color: green;
@@ -23,7 +23,7 @@
   animation-fill-mode: forwards;
 }
 .Node-shortest {
-  animation-name: shortestPart-animation;
+  animation-name: shortestPath-animation;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 0;
@@ -33,38 +33,20 @@
 }
 @keyframes Visited-animation {
   0% {
-    transform: scale(0.3);
-    background-color: rgba(0, 0, 66, 0.75);
-    border-radius: 100%;
+    background-color: rgba(3, 58, 12, 0.75);
   }
-
-  50% {
-    background-color: rgba(17, 104, 217, 0.75);
-  }
-
-  75% {
-    transform: scale(1.2);
-    background-color: rgba(0, 217, 159, 0.75);
-  }
-
   100% {
-    transform: scale(1);
-    background-color: rgba(0, 190, 218, 0.75);
+    background-color: rgba(3, 168, 194, 0.75);
   }
 }
-@keyframes shortestPart-animation {
+@keyframes shortestPath-animation {
   0% {
     transform: scale(0.6);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(253, 163, 45);
   }
-
-  50% {
-    transform: scale(1.2);
-    background-color: rgb(255, 254, 106);
-  }
-
   100% {
     transform: scale(1);
-    background-color: rgb(255, 254, 106);
+    background-color: rgb(255, 247, 4);
+    border: solid rgb(255, 247, 4) 0.5px;
   }
 }

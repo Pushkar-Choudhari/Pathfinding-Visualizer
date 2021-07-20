@@ -3,8 +3,10 @@ import Navbar from "./Navbar";
 import "./Grid.css";
 import Node from "./Node";
 import { dijkstra } from "../algorithms/Dijkstra";
-const NO_OF_ROWS = Math.floor((window.innerHeight - 50) / 40 - 1);
-const NO_OF_COLS = Math.floor(window.innerWidth / 40 - 2);
+import { A_star } from "../algorithms/A_star";
+const NO_OF_ROWS = Math.floor((window.innerHeight - 70) / 30 - 2);
+const NO_OF_COLS = Math.floor((window.innerWidth - 10) / 30 - 2);
+//console.log(NO_OF_COLS, NO_OF_ROWS);
 function Grid() {
   const grid = constructInitialGrid();
   const [mousePressed, setMousePressed] = useState(false);
@@ -16,21 +18,28 @@ function Grid() {
   const [shortestPathArray, setShortestPathArray] = useState(() =>
     createArray()
   );
+  const [searchType, setSearchType] = useState("1");
   const mouseStateToggle = (state) => {
     setMousePressed(state);
   };
-  //console.log(visited);
+  const resetBoard = () => {
+    const array1 = createArray();
+    const array2 = createArray();
+    const array3 = createArray();
+    setVisited([...array1]);
+    setWall([...array2]);
+    setShortestPathArray([...array3]);
+  };
   const animateDijkstra = () => {
-    const { visitedNodesInOrder, shortestPath } = dijkstra(
-      start,
-      end,
-      wall,
-      NO_OF_ROWS,
-      NO_OF_COLS
-    );
+    let searchObject;
+    if (searchType === "1") {
+      searchObject = dijkstra(start, end, wall, NO_OF_ROWS, NO_OF_COLS);
+    } else if (searchType === "2") {
+      searchObject = A_star(start, end, wall, NO_OF_ROWS, NO_OF_COLS);
+    }
+    const { visitedNodesInOrder, shortestPath } = searchObject;
     shortestPath.reverse();
     const length = visitedNodesInOrder.length;
-    //console.log(shortestPath);
     for (let i = 0; i < length + shortestPath.length; i++) {
       setTimeout(() => {
         if (i < length) {
@@ -83,6 +92,8 @@ function Grid() {
         setNodeType={setNodeType}
         nodeType={nodeType}
         animateDijkstra={animateDijkstra}
+        resetBoard={resetBoard}
+        setSearchType={setSearchType}
       />
       <div className="Grid">{setUpGrid}</div>
     </>
