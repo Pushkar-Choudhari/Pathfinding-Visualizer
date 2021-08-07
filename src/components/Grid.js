@@ -7,6 +7,7 @@ import { A_star } from "../algorithms/A_star";
 const NO_OF_ROWS = Math.floor((window.innerHeight - 70) / 30 - 2);
 const NO_OF_COLS = Math.floor((window.innerWidth - 10) / 30 - 2);
 //console.log(NO_OF_COLS, NO_OF_ROWS);
+
 function Grid() {
   const grid = constructInitialGrid();
   const [mousePressed, setMousePressed] = useState(false);
